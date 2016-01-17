@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Memory</string>
+    <string name="time"><b>TIME</b></string>
+    <string name="best_time"><b>BEST TIME</b></string>
 </resources>

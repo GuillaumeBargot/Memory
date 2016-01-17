@@ -198,28 +198,28 @@ public class FileManaging {
         Integer result = null;
         switch (i){
             case 0:
-                result = R.drawable.sample_0;
+                result = R.drawable.sample_0_round;
                 break;
             case 1:
-                result = R.drawable.sample_1;
+                result = R.drawable.sample_1_round;
                 break;
             case 2:
-                result = R.drawable.sample_2;
+                result = R.drawable.sample_2_round;
                 break;
             case 3:
-                result = R.drawable.sample_3;
+                result = R.drawable.sample_3_round;
                 break;
             case 4:
-                result = R.drawable.sample_4;
+                result = R.drawable.sample_4_round;
                 break;
             case 5:
-                result = R.drawable.sample_5;
+                result = R.drawable.sample_5_round;
                 break;
             case 6:
-                result = R.drawable.sample_6;
+                result = R.drawable.sample_6_round;
                 break;
             case 7:
-                result = R.drawable.sample_7;
+                result = R.drawable.sample_7_round;
                 break;
         }
         return result;
@@ -271,28 +271,28 @@ public class FileManaging {
     private static Integer convertSingleIntegerToInt(Integer i){
         int result = 0;
         switch (i){
-            case R.drawable.sample_0:
+            case R.drawable.sample_0_round:
                 result = 0;
                 break;
-            case R.drawable.sample_1:
+            case R.drawable.sample_1_round:
                 result = 1;
                 break;
-            case R.drawable.sample_2:
+            case R.drawable.sample_2_round:
                 result = 2;
                 break;
-            case R.drawable.sample_3:
+            case R.drawable.sample_3_round:
                 result = 3;
                 break;
-            case R.drawable.sample_4:
+            case R.drawable.sample_4_round:
                 result = 4;
                 break;
-            case R.drawable.sample_5:
+            case R.drawable.sample_5_round:
                 result = 5;
                 break;
-            case R.drawable.sample_6:
+            case R.drawable.sample_6_round:
                 result = 6;
                 break;
-            case R.drawable.sample_7:
+            case R.drawable.sample_7_round:
                 result = 7;
                 break;
         }

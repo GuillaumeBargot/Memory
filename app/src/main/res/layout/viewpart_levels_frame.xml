@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:background="@drawable/rect_grid_text">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp">
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:id="@+id/levels_frame_2">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:id="@+id/levels_frame_3">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:id="@+id/levels_frame_4">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/levels_frame_5">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="32dp">
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:id="@+id/levels_frame_6">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:id="@+id/levels_frame_7">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/levels_frame_8">
+
+            </com.example.guillaume.test.memory.UIParts.LevelsButton>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

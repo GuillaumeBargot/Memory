@@ -29,10 +29,10 @@ public class GameState {
     private int firstClickedPosition=-1;
 
     //Les adresses resources des images disponibles. Le jeu est scalable si on a plus de 8 photos.
-    private static Integer[] availableImages = {R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1};
+    private static Integer[] availableImages = {R.drawable.sample_2_round, R.drawable.sample_3_round,
+            R.drawable.sample_4_round, R.drawable.sample_5_round,
+            R.drawable.sample_6_round, R.drawable.sample_7_round,
+            R.drawable.sample_0_round, R.drawable.sample_1_round};
 
     //Constructeur pour nouvelle partie, on ne regarde que le nombre d'images
     public GameState(int nombreImages){

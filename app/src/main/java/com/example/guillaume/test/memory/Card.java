@@ -1,6 +1,11 @@
 package com.example.guillaume.test.memory;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.media.Image;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -70,4 +75,9 @@ public class Card extends RelativeLayout {
     public void hide(){
         back.setVisibility(VISIBLE);
     }
+
+    public ImageView getImage(){
+        return image;
+    }
+
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.guillaume.test.memory.UIParts.LevelsFrame;
+
 public class NewGameActivity extends AppCompatActivity {
 
     //Utilisée pour passer le nombre d'images à la GameActivity
@@ -16,17 +18,8 @@ public class NewGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
 
-        //On trouve les boutons
-        Button button2 = (Button)findViewById(R.id.new_game_button_2);
-        Button button3 = (Button)findViewById(R.id.new_game_button_3);
-        Button button4 = (Button)findViewById(R.id.new_game_button_4);
-        Button button5 = (Button)findViewById(R.id.new_game_button_5);
-        Button button6 = (Button)findViewById(R.id.new_game_button_6);
-        Button button7 = (Button)findViewById(R.id.new_game_button_7);
-        Button button8 = (Button)findViewById(R.id.new_game_button_8);
-
-        //Et on créé leurs onClickListener
-        button2.setOnClickListener(new View.OnClickListener() {
+        LevelsFrame levelsFrame = (LevelsFrame)findViewById(R.id.new_game_levels_frame);
+        levelsFrame.getLevel2().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -36,7 +29,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        button3.setOnClickListener(new View.OnClickListener() {
+        levelsFrame.getLevel3().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -46,7 +39,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        button4.setOnClickListener(new View.OnClickListener() {
+        levelsFrame.getLevel4().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -56,7 +49,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        button5.setOnClickListener(new View.OnClickListener() {
+        levelsFrame.getLevel5().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -66,7 +59,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        button6.setOnClickListener(new View.OnClickListener() {
+        levelsFrame.getLevel6().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -76,7 +69,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        button7.setOnClickListener(new View.OnClickListener() {
+        levelsFrame.getLevel7().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -86,7 +79,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        button8.setOnClickListener(new View.OnClickListener() {
+        levelsFrame.getLevel8().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);

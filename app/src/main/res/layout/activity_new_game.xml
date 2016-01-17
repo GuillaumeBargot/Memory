@@ -5,64 +5,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.guillaume.test.memory.NewGameActivity">
+    tools:context="com.example.guillaume.test.memory.NewGameActivity"
+    android:background="@color/backgroundChoice">
+    <com.example.guillaume.test.memory.UIParts.LevelsFrame
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_game_levels_frame"
+        android:layout_centerInParent="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/new_game_title"
-        android:layout_centerHorizontal="true"
-        android:text="Choisissez le nombre de paires d'images"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/new_game_title"
-        android:layout_marginTop="48dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_2"
-            android:text="2"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_3"
-            android:text="3"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_4"
-            android:text="4"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_5"
-            android:text="5"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/new_game_title"
-        android:layout_marginTop="120dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_6"
-            android:text="6"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_7"
-            android:text="7"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_game_button_8"
-            android:text="8"/>
-    </LinearLayout>
+    </com.example.guillaume.test.memory.UIParts.LevelsFrame>
 </RelativeLayout>

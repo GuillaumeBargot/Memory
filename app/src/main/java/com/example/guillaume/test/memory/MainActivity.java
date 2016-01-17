@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.guillaume.test.memory.UIParts.MenuButton;
+import com.example.guillaume.test.memory.UIParts.MenuFrame;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +33,8 @@ import java.nio.CharBuffer;
 public class MainActivity extends AppCompatActivity {
 
     //Le bouton pour continuer une partie
-    private Button continueButton;
+    //private Button continueButton;
+    private MenuFrame menuFrame;
     //Utilisé pour passer des données à GameActivity pour lui indiquer qu'on souhaite continuer une partie
     public static final String CONTINUE = "com.example.guillaume.test.memory.CONTINUE";
 
@@ -44,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
             FileManaging.createBasicFile(this);
         }
 
-        //Le bouton continuer, arrive dans la GameActivity avec le message "continue"
-        continueButton = (Button)findViewById(R.id.main_button_continue_game);
-        continueButton.setOnClickListener(new View.OnClickListener() {
+        menuFrame = (MenuFrame)findViewById(R.id.main_menu_frame);
+        menuFrame.getContinueButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
@@ -55,20 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //Le bouton "Nouvelle Partie", arrive dans la NewGameActivity
-        Button newGameButton = (Button)findViewById(R.id.main_button_new_game);
-        newGameButton.setOnClickListener(new View.OnClickListener() {
+        menuFrame.getPlayButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), NewGameActivity.class);
                 startActivity(intent);
             }
         });
-
-        //Le bouton HighScores, arrive dans la HighScoresActivity
-        Button highScoreButton = (Button)findViewById(R.id.main_button_score);
-        highScoreButton.setOnClickListener(new View.OnClickListener() {
+        menuFrame.getStatsButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HighScoresActivity.class);
@@ -78,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         //On teste si il existe une sauvegarde. Si oui, on affiche l'option de continuer.
         if(FileManaging.checkIfCurrentGame(this)){
-            continueButton.setVisibility(View.VISIBLE);
+            menuFrame.setContinuePossible(true);
         } else {
-            continueButton.setVisibility(View.GONE);
+            menuFrame.setContinuePossible(false);
         }
     }
 
@@ -88,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         if(FileManaging.checkIfCurrentGame(this)){
-            continueButton.setVisibility(View.VISIBLE);
+            menuFrame.setContinuePossible(true);
         } else {
-            continueButton.setVisibility(View.GONE);
+            menuFrame.setContinuePossible(false);
         }
     }
 }

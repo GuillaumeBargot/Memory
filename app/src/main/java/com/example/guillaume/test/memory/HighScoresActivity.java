@@ -42,11 +42,9 @@ public class HighScoresActivity extends AppCompatActivity {
     public static String formatTheScore(int i){
         String result = "";
         if(i == -1){
-            result = "Aucun Score";
-        }else if(i>3600){
-            result = i/3600 + ":" + String.format("%02d", (i%3600)/60) + ":" + String.format("%02d",(i%3600)%60);
-        }else{
-            result = String.format("%02d",i/60) + ":" + String.format("%02d",i%60);
+            result = "No score";
+        }else {
+            result = String.format("%02d", i / 3600) + ":" + String.format("%02d", (i % 3600) / 60) + ":" + String.format("%02d", (i % 3600) % 60);
         }
         return result;
     }

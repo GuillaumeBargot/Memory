@@ -1,6 +1,19 @@
 package com.example.guillaume.test.memory;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -43,14 +56,43 @@ public class CardAdapter extends BaseAdapter {
 
         if(convertView == null){
             card = new Card(mContext);
-            card.setLayoutParams(new GridView.LayoutParams(200, 200));
+            float pixels;
+            if(getWidthDeviceDp(mContext) >= 360){
+                 pixels = convertDpToPixel(75, mContext);
+            }else{
+                pixels = convertDpToPixel(62,mContext);
+            }
+            card.setLayoutParams(new GridView.LayoutParams((int) pixels, (int) pixels));
             card.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            card.setPadding(8, 8, 8, 8);
         } else{
             card = (Card) convertView;
         }
         card.setImageResource(gameState.getImageAt(position));
+
         return card;
+    }
+
+    //Convertit les dp en pixel
+    public static float convertDpToPixel(float dp, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return px;
+    }
+
+    //Convertit les pixels en dp
+    public static float convertPixelsToDp(float px, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float dp = px / (metrics.densityDpi / 160f);
+        return dp;
+    }
+
+    //Renvoie la taille de la largeur(la plus petite mesure) de l'appareil
+    public static int getWidthDeviceDp(Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        return Math.min((int) convertPixelsToDp(dm.widthPixels, context), (int)convertPixelsToDp(dm.heightPixels,context));
     }
 
 

@@ -2,12 +2,15 @@ package com.example.guillaume.test.memory;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.method.CharacterPickerDialog;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,18 +23,24 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.guillaume.test.memory.UIParts.LevelsButton;
+import com.example.guillaume.test.memory.UIParts.MenuButton;
+import com.example.guillaume.test.memory.UIParts.RecapFrame;
+
 import java.io.File;
+import java.util.logging.Level;
 
 public class GameActivity extends AppCompatActivity {
 
     //Les élements graphiques
     private Chronometer chronometer;
-    private ImageView pauseButton;
+    private LevelsButton pauseButton;
     private RelativeLayout greyScreen;
     private RelativeLayout winScreen;
-    private ImageView continueButton;
-    private TextView textWinScore;
+    private LevelsButton continueButton;
+    private RecapFrame recapFrame;
     private GridView gridView;
+    private TextView highScore;
 
     //Le timer du côté de l'UI : quand on arrêtte le jeu pour n'importe quelle raison, le chronomètre s'arrêtte et le temps est stocké ici.
     private int timer = 0;
@@ -60,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             timer = savedInstanceState.getInt("timer");
             gameState = new GameState(savedInstanceState.getInt("nbImages"),savedInstanceState.getIntegerArrayList("images"),savedInstanceState.getBooleanArray("revelees"),timer);
+            isWon = savedInstanceState.getBoolean("isWon");
         } else {
             //Si l'activité vient d'autre part qu'un changement d'orientation d'écran, on regarde d'où l'utilisateur vient:
             //-de l'activité Nouvelle Partie
@@ -90,20 +100,24 @@ public class GameActivity extends AppCompatActivity {
         }
 
         //On montre le meilleur score actuel pour cette catégorie
-        TextView highScore = (TextView)findViewById(R.id.game_text_high_score);
-        highScore.setText("Meilleur Score :\n" + FileManaging.getFormatedHighScoreForNb(this,gameState.getNbImages()));
+        highScore = (TextView)findViewById(R.id.game_text_high_score);
+        String highScoreText = getResources().getString(R.string.best_time) + "  " + FileManaging.getFormatedHighScoreForNb(this,gameState.getNbImages());
+        SpannableString spannableString = new SpannableString(highScoreText);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0, 9, 0);
+        highScore.setText(spannableString);
 
 
         //Trouver les parties de l'UI
         greyScreen = (RelativeLayout)findViewById(R.id.game_grey_screen);
         winScreen = (RelativeLayout)findViewById(R.id.game_win_screen);
-        continueButton = (ImageView)findViewById(R.id.game_button_resume);
-        textWinScore = (TextView)findViewById(R.id.game_text_win_score);
+        continueButton = (LevelsButton)findViewById(R.id.game_button_resume);
         gridView = (GridView)findViewById(R.id.game_gridview);
         chronometer = (Chronometer)findViewById(R.id.game_chronometer);
-        pauseButton = (ImageView)findViewById(R.id.game_button_pause);
+        pauseButton = (LevelsButton)findViewById(R.id.game_button_pause);
+        recapFrame = (RecapFrame)findViewById(R.id.game_recap_frame);
 
         //S'occupe de ce qui arrive après que l'utilisateur appuie sur le bouton "Play" (visible uniquement quand le jeu est en pause)
+        continueButton.setImageButton(R.drawable.ic_play_arrow_white_24dp);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +128,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         //S'occupe de ce qui arrive quand l'utilisateur appuie sur "Nouvelle partie"
-        Button winButton = (Button)findViewById(R.id.game_button_win);
+        MenuButton winButton = recapFrame.getButton();
         winButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,16 +205,28 @@ public class GameActivity extends AppCompatActivity {
 
 
         //On s'occupe de ce qu'il se passe quand l'utilisateur appuie sur le bouton pause en bas à droite.
+        //Si c'est l'écran de Win et qu'on a changé d'orientation, il faut empêcher l'action sur le bouton.
+        pauseButton.setImageButton(R.drawable.ic_pause_white_24dp);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopTheChronometer();
+                if(!isWon && !isPaused) {
+                    stopTheChronometer();
+                }
             }
         });
 
 
         //Par défaut, quand l'utilisateur revient à onCreate, c'est une pause, on veut donc que l'écran gris de pause soit visible.
-        greyScreen.setVisibility(View.VISIBLE);
+        //Si c'est une win, on doit récupérer le score et le highscore pour l'afficher vu que l'utilisateur vient de tourner l'écran sur un WinScreen.
+        //On utilise ce if pour éviter de retourner à une pause si la partie est gagnée et que l'utilisateur tourne l'écran quand même.
+        if(isWon){
+            winScreen.setVisibility(View.VISIBLE);
+            recapFrame.setBesttime(FileManaging.getFormatedHighScoreForNb(this,gameState.getNbImages()));
+            recapFrame.setTime(HighScoresActivity.formatTheScore(timer/1000));
+        }else {
+            greyScreen.setVisibility(View.VISIBLE);
+        }
 
         //Le timer doit être mis à jour: soit c'est le début d'une partie et il sera à 0 soit on vient d'une des autres possibles voies et on actualise le chronomètre
         chronometer.setBase(SystemClock.elapsedRealtime() - timer);
@@ -227,7 +253,8 @@ public class GameActivity extends AppCompatActivity {
         outState.putInt("timer", timer);
         outState.putInt("nbImages", gameState.getNbImages());
         outState.putIntegerArrayList("images", gameState.getImages());
-        outState.putBooleanArray("revelees",gameState.getRevelees());
+        outState.putBooleanArray("revelees", gameState.getRevelees());
+        outState.putBoolean("isWon", isWon);
 
         super.onSaveInstanceState(outState);
     }
@@ -278,11 +305,12 @@ public class GameActivity extends AppCompatActivity {
         isWon = true;
         FileManaging.removeCurrentGame(getApplicationContext());
         boolean gagne = FileManaging.checkAndPutNewHighScore(gameState.getNbImages(), timer / 1000, this);
-        if(gagne){
-            textWinScore.setText("High Score Battu !");
-        }else{
-            textWinScore.setVisibility(View.GONE);
-        }
+
+        //Nouvelle façon de faire le winScreen
+        recapFrame.setTime(HighScoresActivity.formatTheScore(timer/1000));
+        recapFrame.setBesttime(FileManaging.getFormatedHighScoreForNb(this, gameState.getNbImages()));
+        //Ici on ne récupère pas le besttime depuis la TextView qui l'affiche pendant la partie car il y a possibilité que l'utilisateur vienne de battre le meilleur score, donc on va
+        //le chercher directement du fichier.
 
         winScreen.setVisibility(View.VISIBLE);
     }

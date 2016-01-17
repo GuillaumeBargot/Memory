@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/game_relative_layout"
+    tools:context="com.example.guillaume.test.memory.GameActivity"
+    android:background="@color/backgroundChoice">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="20">
+    <RelativeLayout
+        android:layout_height="fill_parent"
+        android:layout_width="0dp"
+        android:paddingTop="16dp"
+        android:layout_weight="9">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time"
+                    android:textColor="#FFF"
+                    android:textSize="18sp"/>
+                <Chronometer
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/game_chronometer"
+                    android:padding="8dp"
+                    android:textColor="#FFF"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/game_text_high_score"
+                android:padding="8dp"
+                android:textColor="#FFF"
+                android:textSize="18sp"
+                android:text="Pas de meilleur score"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+            <com.example.guillaume.test.memory.UIParts.LevelsButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/game_button_pause"
+                android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="11">
+        <GridView
+            android:id="@+id/game_gridview"
+            android:layout_width="264dp"
+            android:layout_height="wrap_content"
+            android:numColumns="4"
+            android:verticalSpacing="4dp"
+            android:horizontalSpacing="4dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/game_grey_screen"
+        android:visibility="gone">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.55"
+            android:background="#000">
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9">
+                <com.example.guillaume.test.memory.UIParts.LevelsButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/game_button_resume"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="16dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="11">
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/game_win_screen"
+        android:visibility="gone">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.55"
+            android:background="#000">
+        </RelativeLayout>
+        <com.example.guillaume.test.memory.UIParts.RecapFrame
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_recap_frame"
+            android:layout_centerInParent="true">
+
+        </com.example.guillaume.test.memory.UIParts.RecapFrame>
+    </RelativeLayout>
+</RelativeLayout>
